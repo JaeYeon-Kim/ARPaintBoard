@@ -55,4 +55,8 @@ public class CreateLine : MonoBehaviour
             linePositions.Clear();
         }
     }
+
+
+    // 그린것을 지우는 기능 
+    
 }
