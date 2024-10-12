@@ -16,7 +16,9 @@ public class CreateLine : MonoBehaviour
     private Vector3 newPos;
     public List<Vector3> linePositions = new List<Vector3>();
 
-    public bool isDrawingEnabled = true;       // 그리기 활성화 여부 
+    private List<GameObject> lineList = new List<GameObject>();        // 그려지는 라인들을 담을 수 있는 리스트
+
+    public bool isDrawingEnabled = true;       // 그리기 활성화 여부 -> Color Picker가 켜진 상태에서는 그림을 못그리도록 설정하는 변수
 
 
     // Start is called before the first frame update
@@ -39,6 +41,8 @@ public class CreateLine : MonoBehaviour
                 linePositions.Add(newPos);
 
                 GameObject obj = Instantiate(linePrefab);
+                lineList.Add(obj);
+                
                 line = obj.GetComponent<LineRenderer>();
 
                 line.positionCount = 1;
@@ -64,5 +68,13 @@ public class CreateLine : MonoBehaviour
 
 
     // 그린것을 지우는 기능 
+    public void ClearLines()
+    {
+        foreach (GameObject line in lineList)
+        {
+            Destroy(line);
+        }
+        lineList.Clear();
+    }
 
 }
