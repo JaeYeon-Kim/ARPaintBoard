@@ -11,6 +11,8 @@ public class ButtonManager : MonoBehaviour
 
     [SerializeField] private GameObject buttonPanel;
 
+    [SerializeField] private CreateLine createLine;
+
     private bool isOpen = false;    // colorPicker를 열고 닫을때 현재 상태 체크를 위한 변수 
 
 
@@ -21,11 +23,13 @@ public class ButtonManager : MonoBehaviour
         if (!isOpen)
         {
             isOpen = true;
+            createLine.isDrawingEnabled = false;
             colorPickerPanel.SetActive(true);
         }
         else
         {
             isOpen = false;
+            createLine.isDrawingEnabled = true;
             colorPickerPanel.SetActive(false);
         }
     }

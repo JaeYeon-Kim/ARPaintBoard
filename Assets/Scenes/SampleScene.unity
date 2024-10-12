@@ -344,6 +344,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: FlexibleColorPicker
       objectReference: {fileID: 0}
+    - target: {fileID: 2130943084915617138, guid: 4214b57e615806c448ba9d993d629531,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2130943085333300167, guid: 4214b57e615806c448ba9d993d629531,
         type: 3}
       propertyPath: m_AnchorMax.x
@@ -633,6 +638,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   colorPickerPanel: {fileID: 1492028557}
   buttonPanel: {fileID: 1197834206}
+  createLine: {fileID: 2018057344}
 --- !u!4 &615930918
 Transform:
   m_ObjectHideFlags: 0
@@ -1693,6 +1699,7 @@ MonoBehaviour:
   linePrefab: {fileID: 2835981804668822822, guid: a3db24e4c81624670ab2d09800a80524,
     type: 3}
   linePositions: []
+  isDrawingEnabled: 1
 --- !u!4 &2018057345
 Transform:
   m_ObjectHideFlags: 0

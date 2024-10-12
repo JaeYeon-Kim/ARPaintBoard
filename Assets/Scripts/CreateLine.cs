@@ -16,6 +16,8 @@ public class CreateLine : MonoBehaviour
     private Vector3 newPos;
     public List<Vector3> linePositions = new List<Vector3>();
 
+    public bool isDrawingEnabled = true;       // 그리기 활성화 여부 
+
 
     // Start is called before the first frame update
     void Start()
@@ -26,37 +28,41 @@ public class CreateLine : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // 마우스(터치)를 누르기 시작
-        if (Input.GetMouseButtonDown(0))
+        if (isDrawingEnabled)
         {
-            mousePos = Input.mousePosition;
-            mousePos.z = cam.nearClipPlane + 1f;
-            newPos = cam.ScreenToWorldPoint(mousePos);
-            linePositions.Add(newPos);
+            // 마우스(터치)를 누르기 시작
+            if (Input.GetMouseButtonDown(0))
+            {
+                mousePos = Input.mousePosition;
+                mousePos.z = cam.nearClipPlane + 1f;
+                newPos = cam.ScreenToWorldPoint(mousePos);
+                linePositions.Add(newPos);
 
-            GameObject obj = Instantiate(linePrefab);
-            line = obj.GetComponent<LineRenderer>();
+                GameObject obj = Instantiate(linePrefab);
+                line = obj.GetComponent<LineRenderer>();
 
-            line.positionCount = 1;
-            line.SetPosition(0, linePositions[0]);  // 선을 그으려면 점이 두개 필요, 첫번째 점 할당 첫번째는 인덱스로는 0 
-        }
-        else if (Input.GetMouseButton(0))      // 마우스(터치)를 누르는 중 
-        {
-            mousePos = Input.mousePosition;
-            mousePos.z = cam.nearClipPlane + 1f;
-            newPos = cam.ScreenToWorldPoint(mousePos);
-            linePositions.Add(newPos);
+                line.positionCount = 1;
+                line.SetPosition(0, linePositions[0]);  // 선을 그으려면 점이 두개 필요, 첫번째 점 할당 첫번째는 인덱스로는 0 
+            }
+            else if (Input.GetMouseButton(0))      // 마우스(터치)를 누르는 중 
+            {
+                mousePos = Input.mousePosition;
+                mousePos.z = cam.nearClipPlane + 1f;
+                newPos = cam.ScreenToWorldPoint(mousePos);
+                linePositions.Add(newPos);
 
-            line.positionCount++;
-            line.SetPosition(line.positionCount -1, linePositions[line.positionCount - 1]);
+                line.positionCount++;
+                line.SetPosition(line.positionCount - 1, linePositions[line.positionCount - 1]);
+            }
+            else if (Input.GetMouseButtonUp(0))
+            {
+                linePositions.Clear();
+            }
         }
-        else if (Input.GetMouseButtonUp(0))
-        {
-            linePositions.Clear();
-        }
+
     }
 
 
     // 그린것을 지우는 기능 
-    
+
 }
