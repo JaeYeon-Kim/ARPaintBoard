@@ -1,5 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 /*
@@ -8,10 +7,17 @@ Color Picker용 스크립트
 public class ApplyColorPicker : MonoBehaviour
 {
     [SerializeField] private FlexibleColorPicker fcp;
-    [SerializeField] private Material material;
-    
+    [SerializeField] private CreateLine createLine;
+
     void Update()
     {
-        material.color = fcp.color;
+        if (createLine.LineList.Count > 0)
+        {
+            var currentLine = createLine.LineList[createLine.LineList.Count - 1];
+            LineRenderer lineRenderer = currentLine.GetComponent<LineRenderer>();
+            lineRenderer.material.color = fcp.color; // 현재 그리는 선의 색상 변경
+        }
+
     }
+
 }

@@ -479,8 +479,19 @@ PrefabInstance:
     - target: {fileID: 2130943084915617138, guid: 4214b57e615806c448ba9d993d629531,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2130943084915617143, guid: 4214b57e615806c448ba9d993d629531,
+        type: 3}
+      propertyPath: m_Type
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2130943084915617143, guid: 4214b57e615806c448ba9d993d629531,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300056, guid: 1eaee135ce037439d925cee5e41ce026,
+        type: 3}
     - target: {fileID: 2130943085333300167, guid: 4214b57e615806c448ba9d993d629531,
         type: 3}
       propertyPath: m_AnchorMax.x
@@ -603,7 +614,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fcp: {fileID: 1492028558}
-  material: {fileID: 2100000, guid: 8e7aba2e6a99c4bb38756555e7f79698, type: 2}
+  createLine: {fileID: 2018057344}
 --- !u!4 &607070854
 Transform:
   m_ObjectHideFlags: 0
@@ -1833,6 +1844,8 @@ MonoBehaviour:
     type: 3}
   linePositions: []
   isDrawingEnabled: 1
+  fcp: {fileID: 1492028558}
+  defaultMaterial: {fileID: 2100000, guid: 8e7aba2e6a99c4bb38756555e7f79698, type: 2}
 --- !u!4 &2018057345
 Transform:
   m_ObjectHideFlags: 0

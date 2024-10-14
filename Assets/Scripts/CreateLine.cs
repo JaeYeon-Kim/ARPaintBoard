@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Runtime.InteropServices;
 using UnityEngine;
 
 
@@ -19,6 +20,12 @@ public class CreateLine : MonoBehaviour
     private List<GameObject> lineList = new List<GameObject>();        // 그려지는 라인들을 담을 수 있는 리스트
 
     public bool isDrawingEnabled = true;       // 그리기 활성화 여부 -> Color Picker가 켜진 상태에서는 그림을 못그리도록 설정하는 변수
+
+    public List<GameObject> LineList => lineList;
+
+    [SerializeField] private FlexibleColorPicker fcp;       // ColorPicker
+    [SerializeField] private Material defaultMaterial;      // defaultMaterial;
+
 
 
     // Start is called before the first frame update
@@ -44,7 +51,8 @@ public class CreateLine : MonoBehaviour
                 lineList.Add(obj);
                 
                 line = obj.GetComponent<LineRenderer>();
-
+                line.material = defaultMaterial;
+                line.material.color = fcp.color;
                 line.positionCount = 1;
                 line.SetPosition(0, linePositions[0]);  // 선을 그으려면 점이 두개 필요, 첫번째 점 할당 첫번째는 인덱스로는 0 
             }
