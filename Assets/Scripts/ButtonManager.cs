@@ -1,9 +1,8 @@
 using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
+using System.IO;
 using UnityEngine;
-using UnityEngine.UI;
-using UnityEngine.Video;
+using UnityEngine.TextCore.Text;
+
 
 public class ButtonManager : MonoBehaviour
 {
@@ -39,6 +38,7 @@ public class ButtonManager : MonoBehaviour
     public void ShareContent()
     {
         Debug.Log("공유하기!!");
+        StartCoroutine(TakeScreenshotAndShare());
     }
 
 
@@ -111,6 +111,35 @@ public class ButtonManager : MonoBehaviour
 #endif
 
         // 캡처 후 버튼 패널 다시 활성화 
+        buttonPanel.SetActive(true);
+    }
+
+
+    // 공유 기능 코루틴 
+
+    private IEnumerator TakeScreenshotAndShare()
+    {
+        // 버튼 패널 비활성화 
+        buttonPanel.SetActive(false);
+
+        yield return new WaitForEndOfFrame();
+
+        // 화면 캡처 후에 Texture 2D 형식의 텍스처 생성 
+        Texture2D texture = ScreenCapture.CaptureScreenshotAsTexture();
+        texture.Apply();
+
+        string filePath = Path.Combine(Application.temporaryCachePath, "shared img.png");
+        File.WriteAllBytes(filePath, texture.EncodeToPNG());
+
+        // To avoid memory leaks
+        Destroy(texture);
+
+        new NativeShare().AddFile(filePath)
+       .SetSubject("Subject goes here").SetText("Hello world!").SetUrl("https://github.com/yasirkula/UnityNativeShare")
+       .SetCallback((result, shareTarget) => Debug.Log("Share result: " + result + ", selected app: " + shareTarget))
+       .Share();
+
+        // 버튼 패널 비활성화 
         buttonPanel.SetActive(true);
     }
 }
